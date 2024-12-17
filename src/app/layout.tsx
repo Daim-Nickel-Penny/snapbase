@@ -22,11 +22,13 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable}`}>
-        <body className="flex flex-col gap-4">
-          <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-          <TopNav />
-          {children}
-          {modal}
+        <body>
+          <div className="grid h-screen grid-rows-[auto_1fr]">
+            <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+            <TopNav />
+            <main className="overflow-y-scroll"> {children}</main>
+            {modal}
+          </div>
           <div id="modal-root" />
         </body>
       </html>
