@@ -2,8 +2,8 @@
 import { useRouter } from "next/navigation";
 import { useUploadThing } from "../utils/uploadthing";
 import { toast } from "sonner";
+import posthog from "posthog-js";
 
-// inferred input off useUploadThing
 type Input = Parameters<typeof useUploadThing>;
 
 function UploadSVG() {
@@ -56,7 +56,6 @@ const useUploadThingInputProps = (...args: Input) => {
     const result = await $ut.startUpload(selectedFiles);
 
     console.log("uploaded files", result);
-    // TODO: persist result in state maybe?
   };
 
   return {
@@ -74,6 +73,7 @@ function SimpleUploadButton() {
 
   const { inputProps } = useUploadThingInputProps("imageUploader", {
     onUploadBegin() {
+      posthog.capture("upload-begin");
       toast(
         <div className="flex items-center gap-2 text-white">
           <LoadingSpinnerSVG /> <span className="text-lg">Uploading...</span>
@@ -85,6 +85,7 @@ function SimpleUploadButton() {
       );
     },
     onClientUploadComplete() {
+      posthog.capture("upload-complete");
       toast.dismiss("upload-begin");
       toast("Uploaded!");
       router.refresh();
