@@ -21,7 +21,7 @@ async function Images() {
               alt={image.name}
             />
           </Link>
-          <div>{image.name}</div>
+          <div>{image.name.substring(0, 20) + "..."}</div>
         </div>
       ))}
     </div>
