@@ -8,6 +8,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import TopNav from "./_components/topnav";
 import { ourFileRouter } from "./api/uploadthing/core";
 import { extractRouterConfig } from "uploadthing/server";
+import { Toaster } from "~/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "SnapBase",
@@ -30,6 +31,7 @@ export default function RootLayout({
             {modal}
           </div>
           <div id="modal-root" />
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>
