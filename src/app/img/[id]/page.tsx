@@ -1,8 +1,14 @@
-export default async function PhotoModal({
+import FullPageImageView from "~/components/full-image-page";
+
+export default async function PhotoPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const photoId = (await params).id;
-  return <div>{photoId}</div>;
+  const idAsNumber = Number(photoId);
+
+  if (Number.isNaN(idAsNumber)) return <div>Invalid photo ID</div>;
+
+  return <FullPageImageView id={idAsNumber} />;
 }
