@@ -1,11 +1,10 @@
 "use client";
 
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import { UploadButton } from "../utils/uploadthing";
-import { useRouter } from "next/navigation";
+
+import SimpleUploadButton from "./simple-upload-button";
 
 function TopNav() {
-  const router = useRouter();
   return (
     <nav className="flex w-full items-center justify-between border-b p-4 text-xl font-semibold">
       <div>Snapbase</div>
@@ -15,7 +14,7 @@ function TopNav() {
           <SignInButton />
         </SignedOut>
         <SignedIn>
-          <UploadButton
+          {/* <UploadButton
             endpoint={"imageUploader"}
             onClientUploadComplete={() => {
               router.refresh();
@@ -24,7 +23,8 @@ function TopNav() {
               // Do something with the error.
               alert(`ERROR! ${error.message}`);
             }}
-          />
+          /> */}
+          <SimpleUploadButton />
           <UserButton />
         </SignedIn>
       </div>
